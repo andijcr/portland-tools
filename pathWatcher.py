@@ -14,13 +14,10 @@ import win32file
 import win32con
 
 #
-# The path to be watched would normally be passed as the parameter
-#  to the script. If it is not, or if the parameter is blank, the
-#  current directory is assumed, whatever that means in the context
-#  of the script's execution.
+# The path to be watched is passed in the masterconfig.py (Sorry larman)
 #
 
-path_to_watch = "C:\\Users\\Public\\Documents\\Shared Virtual Machines\\v58a"
+import masterconfig
 
 print "Watching %s at %s" % (path_to_watch, time.asctime ())
 
@@ -63,7 +60,7 @@ while 1:
 		None,
 		None
 	)
-	
+
 	for action, file in results:
 		full_filename = os.path.join (path_to_watch, file)
 		print full_filename, ACTIONS.get (action, "Unknown")
