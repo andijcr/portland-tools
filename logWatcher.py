@@ -40,8 +40,9 @@ ACTIONS = {
 FILE_LIST_DIRECTORY = 0x0001
 
 def workerFunc(path_to_watch, machine, log_filename, path_to_sync_log):
+	dir_to_watch = os.path.join(path_to_watch, machine)
 	handle_to_Dir = win32file.CreateFile (
-		path_to_watch,
+		dir_to_watch,
 		FILE_LIST_DIRECTORY,
 		win32con.FILE_SHARE_READ | win32con.FILE_SHARE_WRITE | win32con.FILE_SHARE_DELETE,
 		None,
@@ -69,10 +70,10 @@ def workerFunc(path_to_watch, machine, log_filename, path_to_sync_log):
 		new_log_present = len([i for i in results if i[0] == ACTIONS["Renamed to something"] and i[1] == log_filename]) > 0
 
 		if new_log_present:
-			fromPath = os.path.join(path_to_watch, log_filename)
+			fromPath = os.path.join(dir_to_watch, log_filename)
 			print "new log present!" + fromPath
 			now = "{:.0f}".format(time.time()) 		# likely to cause concurrency bug, if the time is set back in the host system
-			toPath= os.path.join(path_to_sync_log,  now + "_"+ vm_name + ".log")
+			toPath= os.path.join(path_to_sync_log,  now + "_"+ machine + ".log")
 			print "copying to " + toPath
 			win32file.CopyFile(fromPath, toPath, 1)
 
@@ -83,7 +84,7 @@ if __name__ == '__main__':
 	print "Watching %s at %s" % (masterconfig.path_to_watch, time.asctime ())
 	workers = []
 	for vm in masterconfig.vm_name:
-		p = Process(target=workerFunc, args=(masterconfig.path_to_watch, vm, masterconfig.log_filename, masterconfig.path_to_sync_log))
+		p = multiprocessing.Process(target=workerFunc, args=(masterconfig.path_to_watch, vm, masterconfig.log_filename, masterconfig.path_to_sync_log))
 		p.start()
 		workers.append(p)
 
