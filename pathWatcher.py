@@ -22,13 +22,13 @@ from masterconfig import *
 print "Watching %s at %s" % (path_to_watch, time.asctime ())
 
 ACTIONS = {
-	1 : "Created",
-	2 : "Deleted",
-	3 : "Updated",
-	4 : "Renamed from something",
-	5 : "Renamed to something"
+	"Created" : 1,
+	"Deleted" : 2,
+	"Updated" : 3,
+	"Renamed from something" : 4,
+	"Renamed to something" : 5
 }
-# Thanks to Claudio Grondi for the correct set of numbers
+# permission request to read a directory
 FILE_LIST_DIRECTORY = 0x0001
 
 handle_to_Dir = win32file.CreateFile (
@@ -40,18 +40,13 @@ handle_to_Dir = win32file.CreateFile (
 	win32con.FILE_FLAG_BACKUP_SEMANTICS,
 	None
 )
+
 while 1:
 	#
 	# ReadDirectoryChangesW takes a previously-created
 	# handle to a directory, a buffer size for results,
 	# a flag to indicate whether to watch subtrees and
 	# a filter of what changes to notify.
-	#
-	# NB Tim Juchcinski reports that he needed to up
-	# the buffer size to be sure of picking up all
-	# events when a large number of files were
-	# deleted at once.
-	#
 	results = win32file.ReadDirectoryChangesW (
 		handle_to_Dir,
 		1024,
@@ -60,6 +55,11 @@ while 1:
 		None,
 		None
 	)
+
+	new_log_present = len([i for i in results if i[0] == ACTIONS["Renamed to something"] and i[1] == log_filename]) > 0
+
+	if new
+
 
 	for action, file in results:
 		full_filename = os.path.join (path_to_watch, file)
