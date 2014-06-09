@@ -15,7 +15,7 @@ import win32con
 
 #
 # The path to be watched is passed in the masterconfig.py (Sorry larman)
-#
+# path_to_watch
 
 import masterconfig
 
