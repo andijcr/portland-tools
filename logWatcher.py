@@ -64,14 +64,14 @@ while 1:
 		None,
 		None
 	)
-	print "events! " + len(results)
+	print "events! " + str(len(results))
 
 	new_log_present = len([i for i in results if i[0] == ACTIONS["Renamed to something"] and i[1] == log_filename]) > 0
 
 	if new_log_present:
-		fromPath = path_to_watch + log_filename
+		fromPath = os.path.join(path_to_watch, log_filename)
 		print "new log present!" + fromPath
 		now = "{:.0f}".format(time.time()) 		# likely to cause concurrency bug, if the time is set back in the host system
-		toPath= path_to_sync_log + now + vm_name + ".log"
-		print "copying to " toPath
+		toPath= os.path.join(path_to_sync_log,  now + "_"+ vm_name + ".log")
+		print "copying to " + toPath
 		win32file.CopyFile(fromPath, toPath, 1)
