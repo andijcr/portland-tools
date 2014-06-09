@@ -13,9 +13,18 @@ import time
 import win32file
 import win32con
 
+# 
+# The vm name to monitor 
+# vm_name
 #
 # The path to be watched is passed in the masterconfig.py (Sorry larman)
 # path_to_watch
+#
+#	The log file to copy
+# log_filename
+# 
+# Where to save the log
+# path_to_sync_log
 
 from masterconfig import *
 
@@ -58,9 +67,6 @@ while 1:
 
 	new_log_present = len([i for i in results if i[0] == ACTIONS["Renamed to something"] and i[1] == log_filename]) > 0
 
-	if new
-
-
-	for action, file in results:
-		full_filename = os.path.join (path_to_watch, file)
-		print full_filename, ACTIONS.get (action, "Unknown")
+	if new_log_present:
+		now = "{:.0f}".format(time.time()) 		# likely to cause concurrency bug, if the time is set back in the host system
+		win32file.CopyFile(path_to_watch + log_filename, path_to_sync_log + now + vm_name + ".log")
