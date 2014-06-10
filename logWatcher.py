@@ -115,7 +115,7 @@ class AppServerSvc (win32serviceutil.ServiceFramework):
 			p.start()
 			workers.append(p)
 
-		while !has_to_stop:
+		while not has_to_stop:
 			time.sleep(5)
 
 		for p in workers:
