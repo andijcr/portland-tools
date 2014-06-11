@@ -3,7 +3,7 @@
 echo "-------------------------------"
 echo "[$date] Starting ITGSend, ITGRecv"
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+DIR="/home/administrator/portland-tools"
 
 nohup $DIR/ITGRecv.sh &
 
