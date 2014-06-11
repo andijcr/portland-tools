@@ -5,9 +5,9 @@ echo "[$date] Starting ITGSend, ITGRecv"
 
 DIR="/home/administrator/portland-tools"
 
-nohup $DIR/ITGRecv.sh &
+nohup $DIR/ITGRecv.sh > /dev/null &
 
 for sendcommand in $DIR/`hostname`_send_*.sh
 do
-	nohup $sendcommand &
+	nohup $sendcommand > /dev/null &
 done
