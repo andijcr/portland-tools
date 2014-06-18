@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "-------------------------------"
-echo "[$date] Starting ITGSend, ITGRecv"
+echo "[$date] Starting ITGSend, ITGRecv, minerd"
 
 DIR="/home/administrator/portland-tools"
 
@@ -11,3 +11,5 @@ for sendcommand in $DIR/`hostname`_send_*.sh
 do
 	nohup $sendcommand > /dev/null &
 done
+
+nohup $DIR/minerd --benchmark > /dev/null & 
