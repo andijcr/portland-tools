@@ -1,6 +1,6 @@
 portland-tools
 ==============
-Tools for Portland - second project for BigData [http://www.dia.uniroma3.it/~torlone/bigdata]/
+Tools for Portland - second project for BigData [http://www.dia.uniroma3.it/~torlone/bigdata/]
 
 setup for the Windows Server 2008 hosts 
 ---------------------------------------
@@ -12,7 +12,7 @@ python host_main_service.py install
 
 installs a windows service that uses host_log_receiver.py and host_logDir_watcher.py to receive log data from the virtual machines, and to save a copy of vmware log file 
 
-configuration is contained in a file named `masterconfig.py`, that has to be added in the forlder using this codeblock as template:
+configuration is contained in a file named `masterconfig.py` that has to be added in the folder using this codeblock as template:
 
 ```python
 """ parameters to pass to host_logDir_watcher """
