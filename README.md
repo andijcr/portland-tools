@@ -44,8 +44,8 @@ sleepSecs = 1
 #how many seconds between two readings? 
 ```
 
-setup for the Ubuntu Server 14.04 guest
----------------------------------------
+setup for the Ubuntu Server 14.04 guests
+----------------------------------------
 python 2.7, pyzmq, bash, (D-ITG)[http://traffic.comics.unina.it/software/ITG/], stress, minerd
 
 ```bash
